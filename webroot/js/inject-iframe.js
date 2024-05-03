@@ -100,7 +100,7 @@ if (elem) {
     if (!win.debugKitListenersApplied) {
       // Add support for turbo DOMContentLoaded alternative
       // see https://turbo.hotwired.dev/reference/events#turbo%3Aload
-      const loadedEvent = Turbo ? 'turbo:load' : 'DOMContentLoaded';
+      const loadedEvent = typeof Turbo !== 'undefined' && Turbo !== null ? 'turbo:load' : 'DOMContentLoaded';
       doc.addEventListener(loadedEvent, onReady, false);
       doc.addEventListener(loadedEvent, proxyAjaxOpen, false);
       doc.addEventListener(loadedEvent, proxyAjaxSend, false);
