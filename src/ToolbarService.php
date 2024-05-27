@@ -61,7 +61,6 @@ class ToolbarService
             'DebugKit.Log' => true,
             'DebugKit.Variables' => true,
             'DebugKit.Environment' => true,
-            'DebugKit.Include' => true,
             'DebugKit.History' => true,
             'DebugKit.Routes' => true,
             'DebugKit.Packages' => true,
