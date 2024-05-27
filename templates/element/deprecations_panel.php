@@ -23,7 +23,7 @@
 
 use function Cake\Core\h;
 
-$hasAny = count($app) + count($plugins) + count($cake) . count($vendor);
+$hasAny = count($app) + count($plugins) + count($cake) + count($vendor);
 
 $printer = function ($section, $data) {
 ?>
