@@ -39,7 +39,10 @@ class IncludePanel extends DebugPanel
     public function __construct()
     {
         $this->_debug = new DebugInclude();
-        deprecationWarning('5.1.0', 'Include panel is deprecated. Remove it from your panel configuration, and use Environment Panel instead.');
+        deprecationWarning(
+            '5.1.0',
+            'Include panel is deprecated. Remove it from your panel configuration, and use Environment Panel instead.'
+        );
     }
 
     /**
