@@ -126,10 +126,10 @@ class DebugKitMiddlewareTest extends TestCase
         $this->assertSame(200, $result->status_code);
         $this->assertGreaterThan(1, $result->panels);
 
-        $this->assertSame('SqlLog', $result->panels[11]->panel);
-        $this->assertSame('DebugKit.sql_log_panel', $result->panels[11]->element);
-        $this->assertNotNull($result->panels[11]->summary);
-        $this->assertSame('Sql Log', $result->panels[11]->title);
+        $this->assertSame('Timer', $result->panels[10]->panel);
+        $this->assertSame('DebugKit.timer_panel', $result->panels[10]->element);
+        $this->assertNotNull($result->panels[10]->summary);
+        $this->assertSame('Timer', $result->panels[10]->title);
 
         $timeStamp = filectime(Plugin::path('DebugKit') . 'webroot' . DS . 'js' . DS . 'inject-iframe.js');
 

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Environment Panel Element
  *
@@ -15,17 +17,19 @@
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
 use Cake\Error\Debugger;
+use function Cake\Core\h;
 
 /**
  * @var \DebugKit\View\AjaxView $this
  * @var array $app
  * @var array $cake
  * @var array $php
+ * @var array $includedFiles
+ * @var array $includePaths
+ * @var \DebugKit\View\Helper\ToolbarHelper $this->Toolbar
+ * @var \DebugKit\View\Helper\CredentialsHelper $this->Credentials
  */
-
-use function Cake\Core\h;
 ?>
-
 <div class="c-environment-panel">
     <h2>Application Constants</h2>
 
@@ -126,4 +130,12 @@ use function Cake\Core\h;
             PHP environment unavailable.
         </div>
     <?php endif; ?>
+
+    <h2>Included Files</h2>
+
+    <h4>Include Paths</h4>
+    <?= $this->Toolbar->dumpNodes($includePaths) ?>
+
+    <h4>Included Files</h4>
+    <?= $this->Toolbar->dumpNodes($includedFiles) ?>
 </div>

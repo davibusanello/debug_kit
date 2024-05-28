@@ -80,6 +80,12 @@
       <code>$vendorName</code>
     </RiskyTruthyFalsyComparison>
   </file>
+  <file src="src/Panel/EnvironmentPanel.php">
+    <RiskyTruthyFalsyComparison>
+      <code>$pluginName</code>
+      <code>$vendorName</code>
+    </RiskyTruthyFalsyComparison>
+  </file>
   <file src="src/Panel/IncludePanel.php">
     <RiskyTruthyFalsyComparison>
       <code>$pluginName</code>

@@ -56,7 +56,7 @@ use Cake\Error\Debugger;
         <code><?php echo h($routePath); ?></code>
     </div>
     <p>
-        <i>[Plugin].[Prefix]/[Controller]::[action]</i>
+        <i class="o-help">Route path grammar: [Plugin].[Prefix]/[Controller]::[action]</i>
     </p>
 
     <h4>Attributes</h4>
@@ -91,6 +91,13 @@ use Cake\Error\Debugger;
         <?= $this->Toolbar->dumpNode($cookie) ?>
     <?php else : ?>
         <p class="c-flash c-flash--info">No Cookie data.</p>
+    <?php endif; ?>
+
+    <h4>Session</h4>
+    <?php if (isset($session)) : ?>
+        <?= $this->Toolbar->dumpNode($session) ?>
+    <?php else : ?>
+        <p class="c-flash c-flash--info">No Session data.</p>
     <?php endif; ?>
 
     <?php if (!empty($matchedRoute)) : ?>

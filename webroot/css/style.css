@@ -238,6 +238,10 @@ strong {
     -webkit-animation: spin 4s linear infinite;
     animation: spin 4s linear infinite;
 }
+.o-help {
+  color: var(--checkbox-label);
+  font-size: 14px;
+}
 
 @-webkit-keyframes spin {
     100% {
