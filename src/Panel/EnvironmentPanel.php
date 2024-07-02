@@ -14,7 +14,6 @@ declare(strict_types=1);
  */
 namespace DebugKit\Panel;
 
-use Cake\Core\Configure;
 use Cake\Error\Debugger;
 use Cake\Event\EventInterface;
 use DebugKit\DebugInclude;
@@ -74,7 +73,6 @@ class EnvironmentPanel extends DebugPanel
             'CAKE_CORE_INCLUDE_PATH' => CAKE_CORE_INCLUDE_PATH,
             'CONFIG' => CONFIG,
             'CORE_PATH' => CORE_PATH,
-            'CAKE_VERSION' => Configure::version(),
             'DS' => DS,
             'LOGS' => LOGS,
             'ROOT' => ROOT,
