@@ -169,11 +169,11 @@ class BenchmarkCommand extends Command
             'required' => true,
         ])
         ->addOption('n', [
-            'default' => 10,
+            'default' => '10',
             'help' => 'Number of iterations to perform.',
         ])
         ->addOption('t', [
-            'default' => 100,
+            'default' => '100',
             'help' =>
                 'Maximum total time for all iterations, in seconds. ' .
                 'If a single iteration takes more than the timeout, only one request will be made',
