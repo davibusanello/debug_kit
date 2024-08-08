@@ -26,6 +26,7 @@ use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use DebugKit\Model\Entity\Request as RequestEntity;
 use DebugKit\ToolbarService;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Test the debug bar
@@ -100,7 +101,7 @@ class ToolbarServiceTest extends TestCase
         $bar = new ToolbarService($this->events, ['panels' => [
             'DebugKit.SqlLog' => false,
             'DebugKit.Cache' => true,
-            'DebugKit.Session',
+            'DebugKit.Session' => true,
         ]]);
         $bar->loadPanels();
 
@@ -407,9 +408,9 @@ class ToolbarServiceTest extends TestCase
      *
      * @param string $domain The domain name where the app is hosted
      * @param bool $isEnabled The expectation for isEnabled()
-     * @dataProvider domainsProvider
      * @return void
      */
+    #[DataProvider('domainsProvider')]
     public function testIsEnabledProductionEnv($domain, $isEnabled)
     {
         Configure::write('debug', true);

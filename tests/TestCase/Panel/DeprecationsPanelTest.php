@@ -40,6 +40,7 @@ class DeprecationsPanelTest extends TestCase
         parent::setUp();
         DeprecationsPanel::clearDeprecatedErrors();
 
+        $this->loadPlugins(['DebugKit']);
         $this->panel = new DeprecationsPanel();
 
         set_error_handler(function ($code, $message, $file, $line, $context = null) {

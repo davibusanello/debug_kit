@@ -17,6 +17,7 @@ namespace DebugKit\Test\TestCase\Database\Log;
 use Cake\Database\Log\LoggedQuery;
 use Cake\TestSuite\TestCase;
 use DebugKit\Database\Log\DebugLog;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
@@ -69,9 +70,9 @@ class DebugLogTest extends TestCase
     /**
      * Test log ignores schema reflection
      *
-     * @dataProvider schemaQueryProvider
      * @return void
      */
+    #[DataProvider('schemaQueryProvider')]
     public function testLogIgnoreReflection($sql)
     {
         $query = new LoggedQuery();
@@ -90,9 +91,9 @@ class DebugLogTest extends TestCase
     /**
      * Test config setting turns off schema ignores
      *
-     * @dataProvider schemaQueryProvider
      * @return void
      */
+    #[DataProvider('schemaQueryProvider')]
     public function testLogIgnoreReflectionDisabled($sql)
     {
         $query = new LoggedQuery();

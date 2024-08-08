@@ -69,16 +69,15 @@ class VariablesPanelTest extends TestCase
         $update = $requests->updateQuery();
         $debugInfoException = $requests->query()->contain('NonExistentAssociation');
 
-        $unserializable = new stdClass();
-        $unserializable->pdo = new PDO('sqlite::memory:');
+        $unserializableDebugInfo = new class extends stdClass {
+            public function __debugInfo()
+            {
+                $unserializable = new stdClass();
+                $unserializable->pdo = new PDO('sqlite::memory:');
 
-        $unserializableDebugInfo = $this
-            ->getMockBuilder('\stdClass')
-            ->addMethods(['__debugInfo'])
-            ->getMock();
-        $unserializableDebugInfo->expects($this->any())->method('__debugInfo')->willReturn([
-            'unserializable' => $unserializable,
-        ]);
+                return ['unserializable' => $unserializable];
+            }
+        };
 
         $resource = fopen('data:text/plain;base64,', 'r');
 
@@ -87,7 +86,7 @@ class VariablesPanelTest extends TestCase
         };
         $vars = [
             'resource' => $resource,
-            // 'unserializableDebugInfo' => $unserializableDebugInfo,
+            'unserializableDebugInfo' => $unserializableDebugInfo,
             'debugInfoException' => $debugInfoException,
             'updateQuery' => $update,
             'query' => $query,

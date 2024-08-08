@@ -59,10 +59,10 @@ class ToolbarControllerTest extends TestCase
         $mock = $this->getMockBuilder('Cake\Cache\CacheEngine')->getMock();
         $mock->expects($this->once())
             ->method('init')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $mock->expects($this->once())
             ->method('clear')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         Cache::setConfig('testing', $mock);
 
         $this->configRequest(['headers' => ['Accept' => 'application/json']]);
