@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to function file_get_contents\\(\\) on a separate line has no effect\\.$#"
-			count: 1
-			path: src/Command/BenchmarkCommand.php
-
-		-
 			message: "#^Method DebugKit\\\\Mailer\\\\Transport\\\\DebugKitTransport\\:\\:send\\(\\) should return array\\{headers\\: string, message\\: string\\} but returns array\\{headers\\: non\\-empty\\-array\\<string\\>, message\\: array\\{text\\: string, html\\: string\\}\\}\\.$#"
 			count: 1
 			path: src/Mailer/Transport/DebugKitTransport.php
