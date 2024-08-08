@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to function file_get_contents\\(\\) on a separate line has no effect\\.$#"
-			count: 1
-			path: src/Command/BenchmarkCommand.php
-
-		-
 			message: "#^Comparison operation \"\\<\" between int\\<0, max\\> and 10\\|100\\|array\\<int, string\\>\\|bool\\|string\\|null results in an error\\.$#"
 			count: 1
 			path: src/Command/BenchmarkCommand.php
