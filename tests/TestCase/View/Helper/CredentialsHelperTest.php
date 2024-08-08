@@ -19,6 +19,7 @@ use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 use DebugKit\View\Helper\CredentialsHelper;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class CredentialsHelperTestCase
@@ -65,6 +66,7 @@ class CredentialsHelperTest extends TestCase
      * @dataProvider credentialsProvider
      * @return void
      */
+    #[DataProvider('credentialsProvider')]
     public function testFilter($in, $out)
     {
         $this->assertSame($out, $this->Helper->filter($in));

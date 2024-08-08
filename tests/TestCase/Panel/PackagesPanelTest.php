@@ -17,6 +17,7 @@ namespace DebugKit\Test\TestCase\Panel;
 
 use Cake\TestSuite\TestCase;
 use DebugKit\Panel\PackagesPanel;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class PackagesPanelTest
@@ -55,9 +56,9 @@ class PackagesPanelTest extends TestCase
     /**
      * test data
      *
-     * @dataProvider packagesProvider
      * @return void
      */
+    #[DataProvider('packagesProvider')]
     public function testData($package)
     {
         $data = $this->panel->data();

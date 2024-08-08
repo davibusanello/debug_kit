@@ -16,7 +16,7 @@ parameters:
 			path: src/Command/BenchmarkCommand.php
 
 		-
-			message: "#^Method DebugKit\\\\Mailer\\\\Transport\\\\DebugKitTransport\\:\\:send\\(\\) should return array\\{headers\\: string, message\\: string\\} but returns array\\{headers\\: non\\-empty\\-array\\<string\\>, message\\: array\\{text\\: string, html\\: string\\}\\}\\.$#"
+			message: "#^Method DebugKit\\\\Mailer\\\\Transport\\\\DebugKitTransport\\:\\:send\\(\\) should return array\\{headers\\: string, message\\: string\\} but returns array\\{headers\\: non\\-empty\\-array\\<string, string\\>, message\\: array\\{text\\: string, html\\: string\\}\\}\\.$#"
 			count: 1
 			path: src/Mailer/Transport/DebugKitTransport.php
 

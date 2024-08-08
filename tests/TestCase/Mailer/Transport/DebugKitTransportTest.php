@@ -31,10 +31,19 @@ class DebugKitTransportTest extends TestCase
     public function setUp(): void
     {
         $this->log = new ArrayObject();
-        $this->wrapped = $this->getMockBuilder(AbstractTransport::class)
-            ->onlyMethods(['send'])
-            ->addMethods(['customMethod'])
-            ->getMock();
+        $this->wrapped = new class extends AbstractTransport {
+            public string $property;
+
+            public function send(Message $message): array
+            {
+                return [];
+            }
+
+            public function customMethod(): string
+            {
+                return 'bloop';
+            }
+        };
         $this->transport = new DebugKitTransport(
             ['debugKitLog' => $this->log],
             $this->wrapped
@@ -55,8 +64,6 @@ class DebugKitTransportTest extends TestCase
 
     public function testMethodProxy()
     {
-        $this->wrapped->method('customMethod')
-            ->will($this->returnValue('bloop'));
         $this->assertSame('bloop', $this->transport->customMethod());
     }
 
