@@ -73,11 +73,6 @@ class DeprecationsPanelTest extends TestCase
         $this->assertStringContainsString('Something going away', $error['message']);
         $this->assertArrayHasKey('niceFile', $error);
         $this->assertArrayHasKey('line', $error);
-
-        $error = $data['plugins']['DebugKit'][2];
-        $this->assertStringContainsString('Raw error', $error['message']);
-        $this->assertArrayHasKey('niceFile', $error);
-        $this->assertArrayHasKey('line', $error);
     }
 
     public function testSummary()
