@@ -165,7 +165,7 @@ class ToolbarService
 
         // Check if the TLD is in the list of safe TLDs.
         $tld = end($parts);
-        $safeTlds = ['localhost', 'invalid', 'test', 'example', 'local'];
+        $safeTlds = ['localhost', 'invalid', 'test', 'example', 'local', 'internal'];
         $safeTlds = array_merge($safeTlds, (array)$this->getConfig('safeTld'));
 
         if (in_array($tld, $safeTlds, true)) {
