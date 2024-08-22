@@ -72,7 +72,7 @@ class Panel extends Entity
     {
         if (is_string($content) && function_exists('gzdeflate')) {
             $contentDeflated = gzdeflate($content, 9);
-            if ($contentDeflated) {
+            if ($contentDeflated !== false) {
                 $content = $contentDeflated;
             }
         }
