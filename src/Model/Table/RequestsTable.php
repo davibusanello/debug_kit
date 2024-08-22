@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -12,6 +13,7 @@ declare(strict_types=1);
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Model\Table;
 
 use Cake\Core\Configure;
@@ -33,8 +35,7 @@ use PDOException;
  * @method \DebugKit\Model\Entity\Request[] patchEntities($entities, array $data, array $options = [])
  * @method \DebugKit\Model\Entity\Request findOrCreate($search, callable $callback = null, array $options = [])
  */
-class RequestsTable extends Table
-{
+class RequestsTable extends Table {
     use LazyTableTrait;
     use SqlTraceTrait;
 
@@ -44,8 +45,7 @@ class RequestsTable extends Table
      * @param array $config Config data.
      * @return void
      */
-    public function initialize(array $config): void
-    {
+    public function initialize(array $config): void {
         $this->hasMany('DebugKit.Panels', [
             'sort' => ['Panels.title' => 'ASC'],
         ]);
@@ -62,8 +62,7 @@ class RequestsTable extends Table
      *
      * @return string
      */
-    public static function defaultConnectionName(): string
-    {
+    public static function defaultConnectionName(): string {
         return 'debug_kit';
     }
 
@@ -73,8 +72,7 @@ class RequestsTable extends Table
      * @param \Cake\ORM\Query\SelectQuery $query The query
      * @return \Cake\ORM\Query\SelectQuery The query.
      */
-    public function findRecent(SelectQuery $query): SelectQuery
-    {
+    public function findRecent(SelectQuery $query): SelectQuery {
         return $query->orderBy(['Requests.requested_at' => 'DESC'])
             ->limit(10);
     }
@@ -84,8 +82,7 @@ class RequestsTable extends Table
      *
      * @return bool
      */
-    protected function shouldGc(): bool
-    {
+    protected function shouldGc(): bool {
         return rand(1, 10) === 10;
     }
 
@@ -94,8 +91,7 @@ class RequestsTable extends Table
      *
      * @return bool
      */
-    protected function shouldGcVacuum(): bool
-    {
+    protected function shouldGcVacuum(): bool {
         return rand(1, 10) === 10;
     }
 
@@ -108,8 +104,7 @@ class RequestsTable extends Table
      *
      * @return void
      */
-    public function gc(): void
-    {
+    public function gc(): void {
         if (!$this->shouldGc()) {
             return;
         }
@@ -157,9 +152,9 @@ class RequestsTable extends Table
                 try {
                     $conn->execute('VACUUM;');
                 } catch (PDOException) {
-                    if (is_file(TMP . 'debug_kit.sqlite')) {
-                        unlink(TMP . 'debug_kit.sqlite');
-                    }
+                    // phpcs:disable
+                    @unlink(TMP . 'debug_kit.sqlite');
+                    // phpcs:enable
                 }
             }
         } catch (PDOException $e) {

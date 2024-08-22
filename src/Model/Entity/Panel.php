@@ -47,8 +47,10 @@ class Panel extends Entity
     protected function _getContent(mixed $content): string
     {
         if (is_string($content)) {
+            // phpcs:disable
             $contentInflated = @gzinflate($content);
-            if ($contentInflated) {
+            // phpcs:enable
+            if ($contentInflated !== false) {
                 return $contentInflated;
             }
 
@@ -72,7 +74,7 @@ class Panel extends Entity
     {
         if (is_string($content)) {
             $contentDeflated = gzdeflate($content, 9);
-            if ($contentDeflated) {
+            if ($contentDeflated !== false) {
                 $content = $contentDeflated;
             }
         }
