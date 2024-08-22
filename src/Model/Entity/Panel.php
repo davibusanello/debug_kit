@@ -36,7 +36,7 @@ class Panel extends Entity
     protected array $_hidden = ['content'];
 
     /**
-     * Read the stream contents.
+     * Read the stream contents or inflate deflated data.
      *
      * Over certain sizes PDO will return file handles.
      * For backwards compatibility and consistency we smooth over that difference here.
@@ -46,8 +46,35 @@ class Panel extends Entity
      */
     protected function _getContent(mixed $content): string
     {
+        if (is_string($content)) {
+            $contentInflated = @gzinflate($content);
+            if ($contentInflated) {
+                return $contentInflated;
+            }
+
+            return $content;
+        }
+
         if (is_resource($content)) {
             return (string)stream_get_contents($content);
+        }
+
+        return '';
+    }
+
+    /**
+     * Deflate the string data before saving it into database
+     *
+     * @param mixed $content Content
+     * @return mixed
+     */
+    protected function _setContent(mixed $content): mixed
+    {
+        if (is_string($content)) {
+            $contentDeflated = gzdeflate($content, 9);
+            if ($contentDeflated) {
+                $content = $contentDeflated;
+            }
         }
 
         return $content;

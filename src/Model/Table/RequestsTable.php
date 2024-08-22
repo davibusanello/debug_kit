@@ -86,7 +86,17 @@ class RequestsTable extends Table
      */
     protected function shouldGc(): bool
     {
-        return rand(1, 100) === 100;
+        return rand(1, 10) === 10;
+    }
+
+    /**
+     * Check if garbage collection vacuum should be run
+     *
+     * @return bool
+     */
+    protected function shouldGcVacuum(): bool
+    {
+        return rand(1, 10) === 10;
     }
 
     /**
@@ -131,7 +141,26 @@ class RequestsTable extends Table
 
             $conn = $this->getConnection();
             if ($conn->getDriver() instanceof Sqlite) {
-                $conn->execute('VACUUM;');
+                $conn->execute('
+                    PRAGMA auto_vacuum = FULL;
+                    PRAGMA journal_mode = OFF;
+                    PRAGMA synchronous = OFF;
+                    PRAGMA foreign_keys = OFF;
+                    PRAGMA temp_store = MEMORY;
+                    PRAGMA automatic_index = OFF;
+                ');
+
+                if (!$this->shouldGcVacuum()) {
+                    return;
+                }
+
+                try {
+                    $conn->execute('VACUUM;');
+                } catch (PDOException) {
+                    if (is_file(TMP . 'debug_kit.sqlite')) {
+                        unlink(TMP . 'debug_kit.sqlite');
+                    }
+                }
             }
         } catch (PDOException $e) {
             Log::warning('Unable to garbage collect requests table. This is probably due to concurrent requests.');
