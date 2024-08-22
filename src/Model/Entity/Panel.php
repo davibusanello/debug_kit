@@ -46,22 +46,20 @@ class Panel extends Entity
      */
     protected function _getContent(mixed $content): string
     {
-        if (is_string($content)) {
+        if (is_resource($content)) {
+            $content = (string)stream_get_contents($content);
+        }
+
+        if (is_string($content) && function_exists('gzinflate')) {
             // phpcs:disable
             $contentInflated = @gzinflate($content);
             // phpcs:enable
             if ($contentInflated !== false) {
                 return $contentInflated;
             }
-
-            return $content;
         }
 
-        if (is_resource($content)) {
-            return (string)stream_get_contents($content);
-        }
-
-        return '';
+        return $content;
     }
 
     /**
@@ -72,9 +70,9 @@ class Panel extends Entity
      */
     protected function _setContent(mixed $content): mixed
     {
-        if (is_string($content)) {
+        if (is_string($content) && function_exists('gzdeflate')) {
             $contentDeflated = gzdeflate($content, 9);
-            if ($contentDeflated !== false) {
+            if ($contentDeflated) {
                 $content = $contentDeflated;
             }
         }
