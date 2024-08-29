@@ -157,10 +157,12 @@ class RequestsTable extends Table
 
                 try {
                     $conn->execute('VACUUM;');
-                } catch (PDOException) {
-                    // phpcs:disable
-                    @unlink(TMP . 'debug_kit.sqlite');
-                    // phpcs:enable
+                } catch (PDOException $e) {
+                    Log::warning(
+                        'Unable to run VACUUM on debug kit SQLite database. ' .
+                            'Please manually remove the database file'
+                    );
+                    Log::warning((string)$e);
                 }
             }
         } catch (PDOException $e) {
