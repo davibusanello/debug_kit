@@ -12,6 +12,7 @@ declare(strict_types=1);
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Model\Table;
 
 use Cake\Core\Configure;
@@ -86,7 +87,17 @@ class RequestsTable extends Table
      */
     protected function shouldGc(): bool
     {
-        return rand(1, 100) === 100;
+        return rand(1, 10) === 10;
+    }
+
+    /**
+     * Check if garbage collection vacuum should be run
+     *
+     * @return bool
+     */
+    protected function shouldGcVacuum(): bool
+    {
+        return rand(1, 10) === 10;
     }
 
     /**
@@ -131,7 +142,26 @@ class RequestsTable extends Table
 
             $conn = $this->getConnection();
             if ($conn->getDriver() instanceof Sqlite) {
-                $conn->execute('VACUUM;');
+                $conn->execute('
+                    PRAGMA auto_vacuum = FULL;
+                    PRAGMA journal_mode = OFF;
+                    PRAGMA synchronous = OFF;
+                    PRAGMA foreign_keys = OFF;
+                    PRAGMA temp_store = MEMORY;
+                    PRAGMA automatic_index = OFF;
+                ');
+
+                if (!$this->shouldGcVacuum()) {
+                    return;
+                }
+
+                try {
+                    $conn->execute('VACUUM;');
+                } catch (PDOException) {
+                    // phpcs:disable
+                    @unlink(TMP . 'debug_kit.sqlite');
+                    // phpcs:enable
+                }
             }
         } catch (PDOException $e) {
             Log::warning('Unable to garbage collect requests table. This is probably due to concurrent requests.');
