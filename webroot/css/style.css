@@ -281,10 +281,6 @@ strong {
     text-align: left;
 }
 
-/* Override styles in cake's default css */
-.c-debug-table .cake-debug-string {
-    margin-right: 48px;
-}
 /* correct height to fit with environment panel */
 .c-debug-table .cake-debug-copy {
     padding: 5px 6px;
