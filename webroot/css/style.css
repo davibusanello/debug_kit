@@ -281,9 +281,9 @@ strong {
     text-align: left;
 }
 
-/* correct height to fit with environment panel */
 .c-debug-table .cake-debug-copy {
-    padding: 5px 6px;
+    position: static;
+    margin-left: 10px;
 }
 
 .c-debug-table .duplicate-route td {
