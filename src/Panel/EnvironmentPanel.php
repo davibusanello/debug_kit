@@ -62,6 +62,7 @@ class EnvironmentPanel extends DebugPanel
             'error_reporting' => ini_get('error_reporting'),
             'upload_max_filesize' => ini_get('upload_max_filesize'),
             'post_max_size' => ini_get('post_max_size'),
+            'zend.assertions' => ini_get('zend.assertions'),
         ];
 
         // CakePHP Data

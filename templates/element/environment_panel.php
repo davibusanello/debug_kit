@@ -34,6 +34,13 @@ use function Cake\Core\h;
 <div class="c-environment-panel">
     <h2>CakePHP Version: <?= Configure::version() ?></h2>
 
+    <?php if (ini_get('zend.assertions') !== '1') : ?>
+        <div class="c-flash c-flash--warning">
+            You should set <code>zend.assertions</code> to <code>1</code>
+            in your <code>php.ini</code> for your development environment.
+        </div>
+    <?php endif; ?>
+
     <h3>Application Constants</h3>
 
     <?php if (!empty($app)) : ?>
