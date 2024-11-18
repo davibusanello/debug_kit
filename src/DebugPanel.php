@@ -105,7 +105,7 @@ class DebugPanel implements EventListenerInterface
     /**
      * Shutdown callback
      *
-     * @param \Cake\Event\EventInterface $event The event.
+     * @param \Cake\Event\EventInterface<\Cake\Controller\Controller> $event The event.
      * @return void
      */
     public function shutdown(EventInterface $event): void

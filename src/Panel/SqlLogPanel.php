@@ -16,7 +16,6 @@ namespace DebugKit\Panel;
 
 use Cake\Core\Configure;
 use Cake\Database\Driver;
-use Cake\Datasource\ConnectionInterface;
 use Cake\Datasource\ConnectionManager;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Table;
@@ -52,10 +51,7 @@ class SqlLogPanel extends DebugPanel
 
         foreach ($configs as $name) {
             $connection = ConnectionManager::get($name);
-            if (
-                $connection->configName() === 'debug_kit'
-                || !$connection instanceof ConnectionInterface
-            ) {
+            if ($connection->configName() === 'debug_kit') {
                 continue;
             }
             $driver = $connection->getDriver();

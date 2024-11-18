@@ -273,11 +273,11 @@ class MailPreviewController extends DebugKitController
             $plugin = "$plugin.";
         }
 
-        /** @var \DebugKit\Mailer\MailPreview $realClass */
         $realClass = App::className($plugin . $previewName, 'Mailer/Preview');
         if (!$realClass) {
             throw new NotFoundException("Mailer preview $previewName not found");
         }
+        /** @var \DebugKit\Mailer\MailPreview $mailPreview */
         $mailPreview = new $realClass();
 
         $email = $mailPreview->find($emailName);
