@@ -608,7 +608,7 @@ strong {
 }
 
 .c-sql-log-panel__entry .in-transaction {
-    background: var(--sql-log-transaction);
+    background: var(--cake-light-gray);
 }
 
 .c-toolbar {

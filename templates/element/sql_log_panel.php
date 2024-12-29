@@ -91,7 +91,7 @@ $noOutput = true;
                             <td><?= h($query['rows']) ?></td>
                             <td><?= h($query['took']) ?></td>
                         </tr>
-                        <?php if($query['isCommitOrRollback']): ?>
+                        <?php if ($query['isCommitOrRollback']): ?>
                             <tr>
                                 <td colspan="3" class="commit-or-rollback">
                                 </td>
