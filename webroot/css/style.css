@@ -60,6 +60,8 @@
     --packages-warning: #ffcc00;
     --packages-link: #000;
 
+    --sql-log-transaction: #d8d8d8;
+
     --routes-btn-active-bg: #fff;
     --routes-btn-active-text: #555;
     --routes-btn-active-border: #6f6f6f;
@@ -603,6 +605,10 @@ strong {
     color: var(--routes-btn-active-text);
     border-color: var(--routes-btn-active-border);
     box-shadow: 0 2px 0 var(--routes-btn-active-border);
+}
+
+.c-sql-log-panel__entry .in-transaction {
+    background: var(--sql-log-transaction);
 }
 
 .c-toolbar {
