@@ -73,7 +73,7 @@ $noOutput = true;
                     </thead>
                     <tbody>
                         <?php foreach ($queries as $query) : ?>
-                        <tr>
+                        <tr<?= $query['inTransaction'] ? ' class="in-transaction"' : '' ?>>
                             <td>
                                 <?=
                                     (new SqlFormatter(
@@ -91,6 +91,12 @@ $noOutput = true;
                             <td><?= h($query['rows']) ?></td>
                             <td><?= h($query['took']) ?></td>
                         </tr>
+                        <?php if ($query['isCommitOrRollback']): ?>
+                            <tr>
+                                <td colspan="3" class="commit-or-rollback">
+                                </td>
+                            </tr>
+                        <?php endif; ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -99,6 +105,6 @@ $noOutput = true;
     <?php endif; ?>
 
     <?php if ($noOutput) : ?>
-    <div class="c-flash c-flash--warning">No active database connections</div>
+        <div class="c-flash c-flash--warning">No active database connections</div>
     <?php endif ?>
 </div>

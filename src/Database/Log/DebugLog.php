@@ -66,6 +66,13 @@ class DebugLog extends AbstractLogger
     protected bool $_includeSchema = false;
 
     /**
+     * Whether a transaction is currently open or not.
+     *
+     * @var bool
+     */
+    protected bool $inTransaction = false;
+
+    /**
      * Constructor
      *
      * @param \Psr\Log\LoggerInterface|null $logger The logger to decorate and spy on.
@@ -162,11 +169,25 @@ class DebugLog extends AbstractLogger
 
         $this->_totalTime += $data['took'];
 
+        $sql = (string)$query;
+        $isBegin = $sql === 'BEGIN';
+        $isCommitOrRollback = $sql === 'COMMIT' || $sql === 'ROLLBACK';
+
+        if ($isBegin) {
+            $this->inTransaction = true;
+        }
+
         $this->_queries[] = [
-            'query' => (string)$query,
+            'query' => $sql,
             'took' => $data['took'],
             'rows' => $data['numRows'],
+            'inTransaction' => $this->inTransaction,
+            'isCommitOrRollback' => $isCommitOrRollback,
         ];
+
+        if ($isCommitOrRollback) {
+            $this->inTransaction = false;
+        }
     }
 
     /**
