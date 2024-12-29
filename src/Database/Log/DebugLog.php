@@ -134,6 +134,7 @@ class DebugLog extends AbstractLogger
      */
     public function log($level, string|Stringable $message, array $context = []): void
     {
+        /** @var \Cake\Database\Log\LoggedQuery|object|null $query */
         $query = $context['query'] ?? null;
 
         if ($this->_logger) {
@@ -153,6 +154,9 @@ class DebugLog extends AbstractLogger
                 ], JSON_PRETTY_PRINT),
                 'took' => $took,
                 'rows' => $context['response']['hits']['total']['value'] ?? $context['response']['hits']['total'] ?? 0,
+                'inTransaction' => $this->inTransaction,
+                'isCommitOrRollback' => false,
+                'role' => '',
             ];
 
             return;
@@ -183,6 +187,7 @@ class DebugLog extends AbstractLogger
             'rows' => $data['numRows'],
             'inTransaction' => $this->inTransaction,
             'isCommitOrRollback' => $isCommitOrRollback,
+            'role' => $query->getContext()['role'],
         ];
 
         if ($isCommitOrRollback) {
