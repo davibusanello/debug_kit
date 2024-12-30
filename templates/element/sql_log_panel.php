@@ -69,6 +69,7 @@ $noOutput = true;
                             <th>Query</th>
                             <th>Rows</th>
                             <th>Took (ms)</th>
+                            <th>Role</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,6 +91,7 @@ $noOutput = true;
                             </td>
                             <td><?= h($query['rows']) ?></td>
                             <td><?= h($query['took']) ?></td>
+                            <td><?= h($query['role']) ?></td>
                         </tr>
                         <?php if ($query['isCommitOrRollback']): ?>
                             <tr>
