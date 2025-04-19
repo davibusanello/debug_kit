@@ -67,3 +67,4 @@ Documentation for DebugKit can be found in the
 ## Panels
 Panels by other plugins:
 - `L10n` by [Setup plugin](https://github.com/dereuromark/cakephp-setup) to show current localization for Date, DateTime, Time objects/values.
+- `Twig` by [Twig plugin](https://github.com/cakephp/twig-view/) to list all templates.
