@@ -28,11 +28,9 @@ php composer.phar require --dev cakephp/debug_kit:"^5.0"
 ```
 
 * [Load the plugin](https://book.cakephp.org/5/en/plugins.html#loading-a-plugin)
-```php
-// src/Application.php
-$this->addPlugin('DebugKit');
 ```
-* Set `'debug' => true,` in `config/app.php`.
+bin/cake plugin load DebugKit --only-debug
+```
 
 ## Is DebugKit not working?
 
